@@ -10,7 +10,6 @@ RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
                 ghostscript \
                 lmodern \
-                pandoc-citeproc \
                 qpdf \
                 r-cran-formatr \
                 r-cran-ggplot2 \
