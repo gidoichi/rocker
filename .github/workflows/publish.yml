@@ -45,6 +45,6 @@ jobs:
         with:
           build-args: "BASE_IMAGE_TAG=${{ steps.tag.outputs.image }}"
           context: r-rmd
-          file: Dockerfile-xpectr
+          file: "{context}/Dockerfile-xpectr"
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/r-rmd:${{ steps.tag.outputs.image }}-xpectr
