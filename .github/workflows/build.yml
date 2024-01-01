@@ -1,0 +1,13 @@
+name: Build
+on:
+  workflow_dispatch:
+jobs:
+  r-rmd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          context: r-rmd
+          push: false
