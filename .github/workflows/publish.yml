@@ -21,6 +21,30 @@ jobs:
           printf 'image=%s' "${GIT_TAG##*/}" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v5
         with:
-          context: ${{ github.job }}
+          context: r-rmd
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.job }}:${{ steps.tag.outputs.image }},${{ vars.DOCKERHUB_USERNAME }}/${{ github.job }}:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/r-rmd:${{ steps.tag.outputs.image }},${{ vars.DOCKERHUB_USERNAME }}/r-rmd:latest
+
+  r-rmd-xpectr:
+    needs: r-rmd
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Derive image tag
+        id: tag
+        env:
+          GIT_TAG: ${{ github.ref_name }}
+        run: |
+          set -eux
+          printf 'image=%s' "${GIT_TAG##*/}" >> "$GITHUB_OUTPUT"
+      - uses: docker/build-push-action@v5
+        with:
+          build-args: "BASE_IMAGE_TAG=${{ steps.tag.outputs.image }}"
+          context: r-rmd
+          file: Dockerfile-xpectr
+          push: true
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/r-rmd:${{ steps.tag.outputs.image }}-xpectr

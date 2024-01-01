@@ -1,0 +1,5 @@
+# -*- mode:dockerfile -*-
+
+ARG BASE_IMAGE_TAG=latest
+FROM gidoichi/r-rmd:$BASE_IMAGE_TAG
+RUN R -q -e 'install.packages("xpectr")'

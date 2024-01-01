@@ -7,5 +7,5 @@
   "branchConcurrentLimit": 0,
   "labels": ["dependencies"],
   "enabledManagers": ["dockerfile"],
-  "includePaths": ["r-rmd/Dockerfile"]
+  "includePaths": ["r-rmd/**"]
 }
