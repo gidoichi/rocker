@@ -15,4 +15,5 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: r-rmd
+          push: true
           tags: ${{ github.job }}:${{ github.ref_name }},${{ github.job }}:latest
